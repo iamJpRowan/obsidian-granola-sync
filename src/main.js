@@ -951,7 +951,7 @@ class GranolaSyncPlugin extends obsidian.Plugin {
           const granolaUrl = this.generateGranolaUrl(docId)
 
           // Combine all tags
-          const allTags = [...attendeeTags, ...folderTags]
+          const allTags = ["granola-notes", ...attendeeTags, ...folderTags]
 
           // Create frontmatter with original title
           let frontmatter = "---\n"
@@ -1012,7 +1012,7 @@ class GranolaSyncPlugin extends obsidian.Plugin {
       const granolaUrl = this.generateGranolaUrl(docId)
 
       // Combine all tags
-      const allTags = [...attendeeTags, ...folderTags]
+      const allTags = ["granola-notes", ...attendeeTags, ...folderTags]
 
       let frontmatter = "---\n"
       frontmatter += "granola_id: " + docId + "\n"
@@ -1596,11 +1596,14 @@ class GranolaSyncPlugin extends obsidian.Plugin {
         // Preserve existing tags that are not person or folder tags
         const existingTags = frontmatter.tags || []
         const preservedTags = existingTags.filter(
-          tag => !tag.startsWith("person/") && !tag.startsWith("folder/")
+          tag =>
+            !tag.startsWith("person/") &&
+            !tag.startsWith("folder/") &&
+            tag !== "granola-notes"
         )
 
-        // Combine attendee and folder tags
-        const newTags = [...attendeeTags, ...folderTags]
+        // Combine attendee and folder tags with granola-notes tag
+        const newTags = ["granola-notes", ...attendeeTags, ...folderTags]
 
         // Update tags
         frontmatter.tags = [...preservedTags, ...newTags]
