@@ -1,0 +1,26 @@
+{
+  "name": "granola-sync",
+  "version": "1.6.3",
+  "description": "Sync your Granola AI notes to your Obsidian vault with customizable settings.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "node esbuild.config.mjs production",
+    "version": "node version-bump.mjs && git add manifest.json versions.json"
+  },
+  "keywords": [
+    "obsidian",
+    "obsidian-plugin",
+    "granola",
+    "sync",
+    "meeting-notes"
+  ],
+  "author": "Danny McClelland",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "builtin-modules": "^3.3.0",
+    "esbuild": "0.19.12",
+    "obsidian": "latest"
+  }
+}
