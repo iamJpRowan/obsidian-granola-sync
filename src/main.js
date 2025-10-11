@@ -970,6 +970,8 @@ class GranolaSyncPlugin extends obsidian.Plugin {
             frontmatter += "updated_at: " + doc.updated_at + "\n"
           }
 
+          frontmatter += "occurrence_to_process: true\n"
+
           // Add all tags if any were found
           if (allTags.length > 0) {
             frontmatter += "tags:\n"
@@ -1029,6 +1031,8 @@ class GranolaSyncPlugin extends obsidian.Plugin {
       if (doc.updated_at) {
         frontmatter += "updated_at: " + doc.updated_at + "\n"
       }
+
+      frontmatter += "occurrence_to_process: true\n"
 
       // Add all tags if any were found
       if (allTags.length > 0) {
