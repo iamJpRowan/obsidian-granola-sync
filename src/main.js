@@ -965,7 +965,7 @@ class GranolaSyncPlugin extends obsidian.Plugin {
           }
 
           if (doc.created_at) {
-            frontmatter += "created_at: " + doc.created_at + "\n"
+            frontmatter += "occurrence_occurred_at: " + doc.created_at + "\n"
           }
           if (doc.updated_at) {
             frontmatter += "updated_at: " + doc.updated_at + "\n"
@@ -1025,7 +1025,7 @@ class GranolaSyncPlugin extends obsidian.Plugin {
       }
 
       if (doc.created_at) {
-        frontmatter += "created_at: " + doc.created_at + "\n"
+        frontmatter += "occurrence_occurred_at: " + doc.created_at + "\n"
       }
       if (doc.updated_at) {
         frontmatter += "updated_at: " + doc.updated_at + "\n"
