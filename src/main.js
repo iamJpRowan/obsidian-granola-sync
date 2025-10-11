@@ -633,10 +633,10 @@ class GranolaSyncPlugin extends obsidian.Plugin {
 
     if (doc.created_at) {
       createdDate = this.formatDate(doc.created_at, this.settings.dateFormat)
-      createdTime = this.formatDate(doc.created_at, "HH-mm-ss")
+      createdTime = this.formatDate(doc.created_at, "HHmm")
       createdDateTime = this.formatDate(
         doc.created_at,
-        this.settings.dateFormat + "_HH-mm-ss"
+        this.settings.dateFormat + " HHmm"
       )
     }
 
@@ -665,7 +665,6 @@ class GranolaSyncPlugin extends obsidian.Plugin {
 
     const invalidChars = /[<>:"/\\|?*]/g
     filename = filename.replace(invalidChars, "")
-    filename = filename.replace(/\s+/g, "_")
 
     return filename
   }
