@@ -1,6 +1,9 @@
 data.json
 .DS_Store
 
+# Environment
+.env
+
 # Node
 node_modules
 package-lock.json

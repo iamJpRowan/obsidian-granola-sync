@@ -1,10 +1,14 @@
 import builtins from "builtin-modules"
+import dotenv from "dotenv"
 import esbuild from "esbuild"
-import { existsSync, watch } from "fs"
+import { existsSync, mkdirSync, watch } from "fs"
 import fs from "fs/promises"
 import path from "path"
 import process from "process"
 import { fileURLToPath } from "url"
+
+// Load environment variables from .env file
+dotenv.config()
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url))
 
@@ -19,20 +23,45 @@ const prod = process.argv[2] === "production"
 // Determine entry point - prefer .ts if it exists, otherwise use .js
 const entryPoint = existsSync("src/main.ts") ? "src/main.ts" : "src/main.js"
 
+// Get output directory - use vault path in dev mode if provided, otherwise use root
+const getOutputDir = () => {
+  if (prod) {
+    // Production builds always go to root
+    return __dirname
+  }
+
+  const vaultPath = process.env.OBSIDIAN_VAULT_PATH
+  if (vaultPath) {
+    const pluginDir = path.join(vaultPath, ".obsidian", "plugins", "granola-sync")
+    // Ensure plugin directory exists
+    if (!existsSync(pluginDir)) {
+      mkdirSync(pluginDir, { recursive: true })
+    }
+    return pluginDir
+  }
+
+  // Default to root if no vault path is provided
+  return __dirname
+}
+
+const outputDir = getOutputDir()
+
 // Copy additional plugin files
 async function copyPluginFiles() {
   try {
-    // Copy manifest.json and styles.css to root
-    await fs.copyFile("src/manifest.json", "manifest.json")
+    const manifestDest = path.join(outputDir, "manifest.json")
+    await fs.copyFile("src/manifest.json", manifestDest)
 
     // Copy styles.css if it exists
     try {
-      await fs.copyFile("src/styles.css", "styles.css")
+      const stylesDest = path.join(outputDir, "styles.css")
+      await fs.copyFile("src/styles.css", stylesDest)
     } catch (error) {
       // styles.css doesn't exist, that's ok
     }
 
-    console.info("Plugin files copied successfully")
+    const dest = outputDir === __dirname ? "root" : outputDir
+    console.info(`Plugin files copied successfully to ${dest}`)
   } catch (error) {
     console.error("Error copying plugin files:", error)
   }
@@ -65,7 +94,7 @@ const context = await esbuild.context({
   logLevel: "info",
   sourcemap: prod ? false : "inline",
   treeShaking: true,
-  outfile: "main.js",
+  outfile: path.join(outputDir, "main.js"),
   minify: prod,
   alias: {
     "@": path.resolve(__dirname, "src"),
