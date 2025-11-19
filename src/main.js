@@ -964,13 +964,13 @@ class GranolaSyncPlugin extends obsidian.Plugin {
           }
 
           if (doc.created_at) {
-            frontmatter += "occurrence_occurred_at: " + doc.created_at + "\n"
+            frontmatter += "occurred_at: " + doc.created_at + "\n"
           }
           if (doc.updated_at) {
             frontmatter += "updated_at: " + doc.updated_at + "\n"
           }
 
-          frontmatter += "occurrence_to_process: true\n"
+          frontmatter += "to_process: true\n"
 
           // Add all tags if any were found
           if (allTags.length > 0) {
@@ -1026,13 +1026,13 @@ class GranolaSyncPlugin extends obsidian.Plugin {
       }
 
       if (doc.created_at) {
-        frontmatter += "occurrence_occurred_at: " + doc.created_at + "\n"
+        frontmatter += "occurred_at: " + doc.created_at + "\n"
       }
       if (doc.updated_at) {
         frontmatter += "updated_at: " + doc.updated_at + "\n"
       }
 
-      frontmatter += "occurrence_to_process: true\n"
+      frontmatter += "to_process: true\n"
 
       // Add all tags if any were found
       if (allTags.length > 0) {

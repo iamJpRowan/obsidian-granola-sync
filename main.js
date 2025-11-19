@@ -27,7 +27,7 @@ var c=require("obsidian"),w=require("path"),M=require("fs");function C(){return 
 `;f+="granola_id: "+s+`
 `;let Y=n.replace(/"/g,'\\"');if(f+='title: "'+Y+`"
 `,k&&(f+='granola_url: "'+k+`"
-`),e.created_at&&(f+="occurrence_occurred_at: "+e.created_at+`
+`),e.created_at&&(f+="occurred_at: "+e.created_at+`
 `),e.updated_at&&(f+="updated_at: "+e.updated_at+`
 `),P.length>0){f+=`tags:
 `;for(let $ of P)f+="  - "+$+`
@@ -43,7 +43,7 @@ var c=require("obsidian"),w=require("path"),M=require("fs");function C(){return 
 `;p+="granola_id: "+s+`
 `;let m=n.replace(/"/g,'\\"');if(p+='title: "'+m+`"
 `,u&&(p+='granola_url: "'+u+`"
-`),e.created_at&&(p+="occurrence_occurred_at: "+e.created_at+`
+`),e.created_at&&(p+="occurred_at: "+e.created_at+`
 `),e.updated_at&&(p+="updated_at: "+e.updated_at+`
 `),h.length>0){p+=`tags:
 `;for(let y of h)p+="  - "+y+`
